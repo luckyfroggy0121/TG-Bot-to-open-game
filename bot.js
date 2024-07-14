@@ -7,6 +7,7 @@ dotenv.config();
 const token = process.env.TOKEN;
 
 const bot = new TelegramBot(token, { polling: true });
+console.log("==========Bot for Feedback===========")
 
 // Handle '/start' command
 bot.onText(/\/start/, (msg) => {
@@ -15,22 +16,25 @@ bot.onText(/\/start/, (msg) => {
         const userName = msg.from.first_name || "there";
         console.log(chatId, msg.from.username);
 
-        const appUrl = `https://bluemoon-mini-app.vercel.app?userId=${chatId}&userName=${encodeURIComponent(userName)}`;
-
-        const welcomeMessage = `Hello, ${userName}! This is Bluemoon 👋\n\nTap on the DOT and earn your coins.\nA little bit later you will be very surprised.\n\nGot friends? Invite them to the game. That’s the way you’ll both earn even more coins together.\n\nThat’s all you need to know to get started.`;
+        const appUrl = `https://telegram-tapping-game.vercel.app/?userId=${chatId}&userName=${encodeURIComponent(userName)}`;
+        console.log(appUrl);
+        // const appUrl = `https://telegram-tapping-game-git-scroll-fix-john-garcias-projects.vercel.app/?userId=${chatId}&userName=${encodeURIComponent(userName)}`;
+        
+        const welcomeMessage = `Hello, *${userName}*! This is SmartLitre 💧\n*Our Goal*: To Revolutionise Hydration 🚀 \nYou've heard about Sweatcoin and Stepn. \nEnough about the steps! 👣\nBring on the water! 💧\nTap to hydrate sea creatures and earn DROPS.\nInvite your friends, unlock new levels, \nearn more DROPS, and become the \nultimate Hydration Hero! 💧`;
 
         const opts = {
+            parse_mode: 'Markdown',  // Enable Markdown parsing mode
             reply_markup: {
                 inline_keyboard: [
                     [
-                        { text: '🕹 Let\'s go', web_app: { url: appUrl } }
+                        { text: ' Let\'s hydrate💧', web_app: { url: appUrl } }
                     ],
                     [
-                        { text: '🤙 Bluemoon Community', url: 'https://t.me/BluemoonMetaverse' }
+                        { text: ' SmartLitre Community', url: 'https://t.me/smartlitrecommunity' }
                     ],
-                    [
-                        { text: '🎓 How to play', url: 'https://telegra.ph/Moon-Coin-05-27' }
-                    ]
+                    // [
+                    //     { text: ' How to earn', url: 'https://telegra.ph/dscghadchkbxkzb-07-06' }
+                    // ]
                 ]
             }
         };
